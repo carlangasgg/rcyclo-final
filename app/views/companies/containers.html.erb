@@ -1,0 +1,89 @@
+<div class="container">
+  <h1>Contenedores</h1>
+
+  <hr>
+
+  <div class="row">
+
+    <!--left col-->
+    <div class="col-sm-3">
+
+      <ul class="list-group">
+        <li class="list-group-item text-muted">Resumen</i></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Totales</strong></span> <%= @containers["containers_empty"] + @containers["containers_half"] + @containers["containers_full"] %></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Vacios</strong></span> <%= @containers["containers_empty"] %></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Medios</strong></span> <%= @containers["containers_half"] %></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Llenos</strong></span> <%= @containers["containers_full"] %></li>
+      </ul>
+
+      <%= link_to "Solicitar un contenedor", companies_request_container_path, class: "	btn btn-primary btn-lg btn-block" %>
+
+    </div>
+
+    <div class="col-sm-9">
+      <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#home" data-toggle="tab">Activos</a></li>
+        <li><a href="#messages" data-toggle="tab">En espera</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="home">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Título</th>
+                  <th>Dirección</th>
+                  <th>Descripción</th>
+                  <th>Última modificación</th>
+                </tr>
+              </thead>
+              <tbody id="items">
+                <% @containers["containers"].each_with_index do |cont, index| %>
+                <tr>
+                  <td><%= index + 1 %> </td>
+                  <td><%= cont["title"] %></td>
+                  <td><%= cont["address"] %></td>
+                  <td><%= cont["description"] %></td>
+                  <td><%= cont["updated_at"] %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="messages">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Título</th>
+                  <th>Dirección</th>
+                  <th>Descripción</th>
+                  <th>Última modificación</th>
+                </tr>
+              </thead>
+              <tbody id="items">
+                <% @containers["containers_waiting"].each_with_index do |cont, index| %>
+                <tr>
+                  <td><%= index + 1 %> </td>
+                  <td><%= cont["title"] %></td>
+                  <td><%= cont["address"] %></td>
+                  <td><%= cont["description"] %></td>
+                  <td><%= cont["updated_at"] %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
